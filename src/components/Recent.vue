@@ -18,8 +18,8 @@
             </div>
           </div>
         </div>
-        <div class="no-data" v-if="recent.dayExists == false" v-on:click="setActiveMode(recent,index)">
-          <div v-if="!getTempByIndex(index)"><i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?</div>
+        <div class="no-data" v-if="recent.dayExists == false">
+          <div class="open-edit" v-on:click="setActiveMode(recent,index)" v-if="!getTempByIndex(index)"><i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?</div>
           <div class="edit" v-if="getTempByIndex(index)">
             <h3>How was {{parseDate(getTempByIndex(index).recent.date)}}?</h3>
             <div class="selects-icons faces">
@@ -41,6 +41,11 @@
                     </ul>
                     <div v-on:click="showAll=true" v-if="showAll==false">Show All...</div>
                   </div>
+                  <div class="notes">
+                    <label>Notes</label>
+                    <input v-model="getTempByIndex(index).recent.notes" placeholder="Your Notes"></input>
+                  </div>
+                  <button type="button" name="button" v-on:click="saveRecent(getTempByIndex(index).recent,recent)"><i class="fa fa-star" aria-hidden="true"></i> Done!</button>
             </div>
           </div>
         </div>
@@ -105,6 +110,7 @@ export default {
         index: index,
         recent: this.clone(recent)
       }
+
       temp.recent.dayExists = true
       this.recentTemp.push(temp)
     },
@@ -118,6 +124,16 @@ export default {
 
       let isPresent = recentOb.treatment.includes(treatment.name)
       !isPresent ? recentOb.treatment.push(treatment.name) : recentOb.treatment.splice(recentOb.treatment.indexOf(treatment.name) , 1)
+    },
+    saveRecent(temp,recent){
+      this.showAll = false
+      console.log(temp);
+      console.log(recent);
+      recent.dayType = temp.dayType
+      recent.dayExists = temp.dayExists
+      recent.notes = temp.notes
+      recent.activeLevel = temp.activeLevel ? temp.activeLevel : 'Full'
+      recent.treatment = temp.treatment
     }
   }
 }
