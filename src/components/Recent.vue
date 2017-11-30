@@ -31,9 +31,9 @@
           <div v-if="getTempByIndex(index).recent.dayType" class="edit-rest">
                 <h4>Where your activities affected?</h4>
                 <div class="selects-icons batteries">
-                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Full'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Full' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-full" aria-hidden="true"></i><span>NO</span></div>
-                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Half'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Half' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-half" aria-hidden="true"></i><span>SLOWED DOWN</span></div>
-                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'None'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='None' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-empty" aria-hidden="true"></i><span>MISSED ACTIVITIES</span></div>
+                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Full'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Full' }" class="fa fa-battery-full" aria-hidden="true"></i><span>NO</span></div>
+                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Half'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Half' }" class="fa fa-battery-half" aria-hidden="true"></i><span>SLOWED DOWN</span></div>
+                    <div v-on:click="getTempByIndex(index).recent.activeLevel = 'None'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='None' }" class="fa fa-battery-empty" aria-hidden="true"></i><span>MISSED ACTIVITIES</span></div>
                 </div>
                 <div class="treatments">
                   <h4>Treatments Used?</h4>

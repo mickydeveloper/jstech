@@ -51,7 +51,8 @@
           font-size      : 3.5rem;
           line-height    : 3.1rem;
           @include respond-to(small-up) {
-            font-size: 5.5rem;
+            font-size  : 5.5rem;
+            line-height: 4.75rem;
           }
 
           & + span {
@@ -62,6 +63,10 @@
       }
 
       &.faces {
+        @include respond-to(small-up) {
+          margin-top: 2rem;
+        }
+
         i {
           color: transparent;
 
