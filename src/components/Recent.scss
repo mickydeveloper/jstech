@@ -85,6 +85,40 @@
           }
         }
       }
+
+      .treatments {
+        h4 {
+          margin-bottom: 0.4rem;
+        }
+
+        div {
+          text-align: center;
+          margin-top: 0.5rem;
+          color     : $blue;
+        }
+
+        ul {
+          padding   : 0;
+          list-style: none;
+          margin    : 0;
+
+          li {
+            display      : inline-block;
+            margin-right : 0.2rem;
+            padding      : 0.6rem;
+            margin-top   : 0.2rem;
+            font-size    : 0.9rem;
+            border-radius: 6px;
+            font-weight  : 500;
+            border       : 1px solid $primary;
+
+            &.active {
+              background: $select;
+              border    : 1px solid $select;
+            }
+          }
+        }
+      }
     }
   }
 

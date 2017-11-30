@@ -34,7 +34,13 @@
                       <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Half'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Half' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-half" aria-hidden="true"></i><span>SLOWED DOWN</span></div>
                       <div v-on:click="getTempByIndex(index).recent.activeLevel = 'None'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='None' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-empty" aria-hidden="true"></i><span>MISSED ACTIVITIES</span></div>
                   </div>
-                  <h4>Treatments Used?</h4>
+                  <div class="treatments">
+                    <h4>Treatments Used?</h4>
+                    <ul>
+                      <li v-for="treatment in treatmentsSettings" v-on:click="toggleActiveTreatment(index,treatment)" v-bind:class="{'active': getTempByIndex(index).recent.treatment.includes(treatment.name)}" v-if="showAll==false ? treatment.status==true : true">{{treatment.name}}</li>
+                    </ul>
+                    <div v-on:click="showAll=true" v-if="showAll==false">Show All...</div>
+                  </div>
             </div>
           </div>
         </div>
@@ -49,7 +55,8 @@ export default {
   data () {
     return {
       msg: 'Recent tab',
-      recentTemp: []
+      recentTemp: [],
+      showAll: false
     }
   },
   computed: {
@@ -58,7 +65,7 @@ export default {
     },
     treatmentsSettings(){
       return this.$store.getters.settingsTabResponse
-    },
+    }
   },
   methods : {
     parseDate (datestring) {
@@ -105,6 +112,12 @@ export default {
       return this.recentTemp.filter(
           function(data){ return data.index == index }
       )[0]
+    },
+    toggleActiveTreatment(index, treatment){
+      let recentOb = this.getTempByIndex(index).recent
+
+      let isPresent = recentOb.treatment.includes(treatment.name)
+      !isPresent ? recentOb.treatment.push(treatment.name) : recentOb.treatment.splice(recentOb.treatment.indexOf(treatment.name) , 1)
     }
   }
 }
