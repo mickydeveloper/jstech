@@ -6,7 +6,7 @@
           <span class="w-20">
             <div class="checkbox">
               <div class="checkbox-wrapper">
-                <input v-bind:id="settings.name" type="checkbox" v-model="settings.status" formControlName="status" :value="settings.status">
+                <input v-bind:id="settings.name" type="checkbox" @change="saveChanges" v-model="settings.status" formControlName="status" :value="settings.status">
                 <label v-bind:for="settings.name"></label>
               </div>
             </div>
@@ -15,7 +15,7 @@
             {{settings.name}}
           </span>
           <span class="w-40">
-            <select name="type" v-model="settings.customType" :value="settings.customType">
+            <select name="type" v-model="settings.customType" @change="saveChanges" :value="settings.customType">
               <option value="others">Others</option>
               <option value="preventative">Preventative</option>
               <option value="relief">Relief</option>
@@ -40,6 +40,12 @@ export default {
       return this.$store.getters.settingsTabResponse
     }
   },
+  methods: {
+    saveChanges(){
+      this.$store.dispatch("postSettings").then(() => {
+      })
+    }
+  }
 }
 </script>
 

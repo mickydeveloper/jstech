@@ -38,6 +38,16 @@ export const store = new Vuex.Store({
             }));
         });
     },
+    postRecent(context) {
+        console.log("posted recent back to server")
+        /* Can post this data back to the API with post request or just pass the changed object into the method to only post the change
+        console.log(this.state.recent)*/
+    },
+    postSettings(context) {
+        console.log("posted settings back to server")
+        /* Can post this data back to the API with post request or just pass the changed object into the method to only post the change
+        console.log(this.state.settings)*/
+    },
     fetchSettings({ commit }) {
         return new Promise((resolve, reject) => {
             Vue.http.get("https://api.myjson.com/bins/9y91n").then((response) => {
