@@ -1,20 +1,25 @@
 <template>
   <div class="recent-list">
     <div class="card-wrapper">
-      <div class="card" v-for="recent in RecentList">
-        <div class="face">
-          <i v-if="recent.dayType == 'Good'" class="fa fa-smile-o" aria-hidden="true"></i>
-          <i v-if="recent.dayType == 'Okay'" class="fa fa-meh-o" aria-hidden="true"></i>
-          <i v-if="recent.dayType == 'Mig'" class="fa fa-frown-o" aria-hidden="true"></i>
-        </div>
-        <div class="content">
-          <div class="date">{{parseDate(recent.date)}}</div>
-          <div class="activeLevel" v-bind:class="recent.activeLevel">{{parseShortActiveLevel(recent.activeLevel)}}</div>
-          <div class="treatments">
-            <ul>
-              <li v-for="treatment in recent.treatment">{{treatment}}</li>
-            </ul>
+      <div class="card" v-for="recent in RecentList" v-bind:class="{'no-data': !recent.dayExists}">
+        <div class="data" v-if="recent.dayExists == true">
+          <div class="face">
+            <i v-if="recent.dayType == 'Good'" class="fa fa-smile-o" aria-hidden="true"></i>
+            <i v-if="recent.dayType == 'Okay'" class="fa fa-meh-o" aria-hidden="true"></i>
+            <i v-if="recent.dayType == 'Mig'" class="fa fa-frown-o" aria-hidden="true"></i>
           </div>
+          <div class="content">
+            <div class="date">{{parseDate(recent.date)}}</div>
+            <div class="activeLevel" v-bind:class="recent.activeLevel">{{parseShortActiveLevel(recent.activeLevel)}}</div>
+            <div class="treatments">
+              <ul>
+                <li v-for="treatment in recent.treatment">{{treatment}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="no-data" v-if="recent.dayExists == false">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?
         </div>
       </div>
     </div>
@@ -44,15 +49,17 @@ export default {
     },
     parseShortActiveLevel (activeLevel) {
       switch (activeLevel) {
-        case activeLevel: 'Full'
+        case 'Full':
           return 'Active'
           break;
-        case activeLevel: 'Half'
+        case 'Half':
           return 'Slower'
           break;
-        case activeLevel: 'None'
+        case 'None':
           return 'Missed'
           break;
+        default:
+          return "";
       }
     }
   }
@@ -64,15 +71,34 @@ export default {
   .card{
     background: $card-bg;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.2rem;
     margin-bottom: 0.8rem;
-    display: flex;
+
+    &.no-data{
+      opacity: 0.7;
+      font-weight: 300;
+      font-size: 0.9rem;
+
+      i{
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .data, .no-data{
+      display: flex;
+    }
 
     .face{
       display: inline-block;
       width: 20%;
+      text-align: center;
       i{
         font-size: 3.5rem;
+
+        @include respond-to(small-up){
+          font-size: 5.5rem;
+        }
 
         &.fa-smile-o{
           color: $blue;
@@ -101,6 +127,7 @@ export default {
         border-radius: 6px;
         padding: 0.4rem;
         margin-top: 0.3rem;
+        margin-bottom: 0.2rem;
         font-size: 0.9rem;
         font-weight: 500;
 
@@ -123,10 +150,10 @@ export default {
 
           li{
             display: inline-block;
-            margin-right: 0.3rem;
+            margin-right: 0.2rem;
             padding: 0.6rem;
             background: $select;
-            margin-top: 0.4rem;
+            margin-top: 0.2rem;
             font-size: 0.9rem;
             border-radius: 6px;
             font-weight: 500;

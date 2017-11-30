@@ -29,7 +29,7 @@ export const store = new Vuex.Store({
   actions: {
     fetchRecent({ commit }) {
         return new Promise((resolve, reject) => {
-            Vue.http.get("https://api.myjson.com/bins/10qr9n").then((response) => {
+            Vue.http.get("https://api.myjson.com/bins/rdlx7").then((response) => {
                 commit("FETCH_RECENT", response.body);
                 resolve();
             })
