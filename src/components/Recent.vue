@@ -1,8 +1,8 @@
 <template>
   <div class="recent-list">
     <div class="card-wrapper">
-      <div class="card" v-for="recent in RecentList" v-bind:class="{'no-data': !recent.dayExists}">
-        <div class="data" v-if="recent.dayExists == true">
+      <div class="card" v-for="(recent, index) in RecentList" v-bind:class="{'no-data': !recent.dayExists && !getTempByIndex(index) }">
+        <div class="data" v-if="recent.dayExists == true && recent.dayType != '' && recent.activeLevel != ''">
           <div class="face">
             <i v-if="recent.dayType == 'Good'" class="fa fa-smile-o" aria-hidden="true"></i>
             <i v-if="recent.dayType == 'Okay'" class="fa fa-meh-o" aria-hidden="true"></i>
@@ -18,8 +18,16 @@
             </div>
           </div>
         </div>
-        <div class="no-data" v-if="recent.dayExists == false">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?
+        <div class="no-data" v-if="recent.dayExists == false" v-on:click="setActiveMode(recent,index)">
+          <div v-if="!getTempByIndex(index)"><i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?</div>
+          <div class="edit" v-if="getTempByIndex(index)">
+            <h3>How was {{parseDate(getTempByIndex(index).recent.date)}}?</h3>
+            <div class="faces-select">
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Good'"><i class="fa fa-smile-o" aria-hidden="true"></i><span>GOOD</span></div>
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Okay'"><i class="fa fa-meh-o" aria-hidden="true"></i><span>OKAY</span></div>
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Mig'"><i class="fa fa-frown-o" aria-hidden="true"></i><span>BAD</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -31,7 +39,8 @@ export default {
   name: 'recent',
   data () {
     return {
-      msg: 'Recent tab'
+      msg: 'Recent tab',
+      recentTemp: []
     }
   },
   computed: {
@@ -61,6 +70,29 @@ export default {
         default:
           return "";
       }
+    },
+    clone(obj) {
+      if (null == obj || "object" != typeof obj) return obj;
+
+      var copy = obj.constructor();
+      for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+      }
+
+      return copy;
+    },
+    setActiveMode(recent,index){
+      let temp = {
+        index: index,
+        recent: this.clone(recent)
+      }
+      temp.recent.dayExists = true
+      this.recentTemp.push(temp)
+    },
+    getTempByIndex(index) {
+      return this.recentTemp.filter(
+          function(data){ return data.index == index }
+      )[0]
     }
   }
 }
@@ -85,8 +117,49 @@ export default {
       }
     }
 
-    .data, .no-data{
+    .data, .no-data, .edit, .faces-select{
       display: flex;
+    }
+
+    .no-data{
+      .edit{
+        width: 100%;
+        flex-direction: column;
+        h3{
+          text-align: center;
+          margin: 0 0 0.5rem;
+          width: 100%;
+        }
+
+        .faces-select{
+          div {
+           display: inline-block;
+           width: 33%;
+           text-align: center;
+           i{
+             display: block;
+
+             font-size: 3.5rem;
+
+             @include respond-to(small-up){
+               font-size: 5.5rem;
+             }
+           }
+         }
+        }
+      }
+    }
+
+    i{
+      &.fa-smile-o, &.fa-smile-o + span{
+        color: $blue;
+      }
+      &.fa-meh-o, &.fa-meh-o + span{
+        color: $yellow;
+      }
+      &.fa-frown-o , &.fa-frown-o + span{
+        color: $orange;
+      }
     }
 
     .face{
@@ -98,16 +171,6 @@ export default {
 
         @include respond-to(small-up){
           font-size: 5.5rem;
-        }
-
-        &.fa-smile-o{
-          color: $blue;
-        }
-        &.fa-meh-o{
-          color: $yellow;
-        }
-        &.fa-frown-o{
-          color: $orange;
         }
       }
     }
