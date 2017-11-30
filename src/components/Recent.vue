@@ -22,10 +22,19 @@
           <div v-if="!getTempByIndex(index)"><i class="fa fa-question-circle" aria-hidden="true"></i>How was your {{parseDate(recent.date)}}?</div>
           <div class="edit" v-if="getTempByIndex(index)">
             <h3>How was {{parseDate(getTempByIndex(index).recent.date)}}?</h3>
-            <div class="faces-select">
-                <div v-on:click="getTempByIndex(index).recent.dayType = 'Good'"><i class="fa fa-smile-o" aria-hidden="true"></i><span>GOOD</span></div>
-                <div v-on:click="getTempByIndex(index).recent.dayType = 'Okay'"><i class="fa fa-meh-o" aria-hidden="true"></i><span>OKAY</span></div>
-                <div v-on:click="getTempByIndex(index).recent.dayType = 'Mig'"><i class="fa fa-frown-o" aria-hidden="true"></i><span>BAD</span></div>
+            <div class="selects-icons faces">
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Good'"><i v-bind:class="{'active': getTempByIndex(index).recent.dayType =='Good' || !getTempByIndex(index).recent.dayType}" class="fa fa-smile-o" aria-hidden="true"></i><span>GOOD</span></div>
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Okay'"><i v-bind:class="{'active': getTempByIndex(index).recent.dayType =='Okay' || !getTempByIndex(index).recent.dayType}" class="fa fa-meh-o" aria-hidden="true"></i><span>OKAY</span></div>
+                <div v-on:click="getTempByIndex(index).recent.dayType = 'Mig'"><i v-bind:class="{'active': getTempByIndex(index).recent.dayType =='Mig' || !getTempByIndex(index).recent.dayType}" class="fa fa-frown-o" aria-hidden="true"></i><span>BAD</span></div>
+            </div>
+            <div v-if="getTempByIndex(index).recent.dayType" class="edit-rest">
+                  <h4>Where your activities affected?</h4>
+                  <div class="selects-icons batteries">
+                      <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Full'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Full' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-full" aria-hidden="true"></i><span>NO</span></div>
+                      <div v-on:click="getTempByIndex(index).recent.activeLevel = 'Half'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='Half' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-half" aria-hidden="true"></i><span>SLOWED DOWN</span></div>
+                      <div v-on:click="getTempByIndex(index).recent.activeLevel = 'None'"><i v-bind:class="{'active': getTempByIndex(index).recent.activeLevel =='None' || !getTempByIndex(index).recent.activeLevel}" class="fa fa-battery-empty" aria-hidden="true"></i><span>MISSED ACTIVITIES</span></div>
+                  </div>
+                  <h4>Treatments Used?</h4>
             </div>
           </div>
         </div>
@@ -46,7 +55,10 @@ export default {
   computed: {
     RecentList(){
       return this.$store.getters.recentTabResponse
-    }
+    },
+    treatmentsSettings(){
+      return this.$store.getters.settingsTabResponse
+    },
   },
   methods : {
     parseDate (datestring) {
@@ -100,129 +112,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  .card{
-    background: $card-bg;
-    border-radius: 8px;
-    padding: 1.2rem;
-    margin-bottom: 0.8rem;
-
-    &.no-data{
-      opacity: 0.7;
-      font-weight: 300;
-      font-size: 0.9rem;
-
-      i{
-        font-size: 1.3rem;
-        margin-right: 0.5rem;
-      }
-    }
-
-    .data, .no-data, .edit, .faces-select{
-      display: flex;
-    }
-
-    .no-data{
-      .edit{
-        width: 100%;
-        flex-direction: column;
-        h3{
-          text-align: center;
-          margin: 0 0 0.5rem;
-          width: 100%;
-        }
-
-        .faces-select{
-          div {
-           display: inline-block;
-           width: 33%;
-           text-align: center;
-           i{
-             display: block;
-
-             font-size: 3.5rem;
-
-             @include respond-to(small-up){
-               font-size: 5.5rem;
-             }
-           }
-         }
-        }
-      }
-    }
-
-    i{
-      &.fa-smile-o, &.fa-smile-o + span{
-        color: $blue;
-      }
-      &.fa-meh-o, &.fa-meh-o + span{
-        color: $yellow;
-      }
-      &.fa-frown-o , &.fa-frown-o + span{
-        color: $orange;
-      }
-    }
-
-    .face{
-      display: inline-block;
-      width: 20%;
-      text-align: center;
-      i{
-        font-size: 3.5rem;
-
-        @include respond-to(small-up){
-          font-size: 5.5rem;
-        }
-      }
-    }
-
-    .content{
-      display: inline-block;
-      width: 80%;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-
-      .date{
-        font-weight: 300;
-      }
-
-      .activeLevel{
-        text-align: center;
-        border-radius: 6px;
-        padding: 0.4rem;
-        margin-top: 0.3rem;
-        margin-bottom: 0.2rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-
-        &.Full{
-          background: $blue;
-        }
-        &.Half{
-          background: $yellow;
-        }
-        &.None{
-          background: $orange;
-        }
-      }
-
-      .treatments{
-        ul{
-          padding: 0;
-          list-style: none;
-          margin: 0;
-
-          li{
-            display: inline-block;
-            margin-right: 0.2rem;
-            padding: 0.6rem;
-            background: $select;
-            margin-top: 0.2rem;
-            font-size: 0.9rem;
-            border-radius: 6px;
-            font-weight: 500;
-          }
-        }
-      }
-    }
-  }
+  @import 'Recent.scss';
 </style>
