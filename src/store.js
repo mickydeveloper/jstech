@@ -13,7 +13,10 @@ export const store = new Vuex.Store({
   getters: {
     recentTabResponse(state){
       return state.recent
-    }
+    },
+    settingsTabResponse(state){
+      return state.settings
+    },
   },
   mutations: {
     FETCH_RECENT(state, recent) {

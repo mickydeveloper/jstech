@@ -30,6 +30,7 @@ export default {
 <style lang="scss" scoped>
 nav{
   display: flex;
+  margin-bottom: 2.5rem;
   a{
     padding: 1rem;
     text-align: center;
