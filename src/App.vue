@@ -32,13 +32,13 @@ nav{
   display: flex;
   margin-bottom: 2.5rem;
   a{
-    padding: 1rem;
+    padding: 0.8rem;
     text-align: center;
     display: inline-block;
     width: 50%;
     text-decoration: none;
     color: $primary;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 1rem;
     font-size: 1.1rem;
     opacity: 0.7;
@@ -46,7 +46,7 @@ nav{
     &.router-link-exact-active {
       opacity: 1;
       border-bottom: 2px solid $primary;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     i{

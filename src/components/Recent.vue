@@ -9,6 +9,12 @@
         </div>
         <div class="content">
           <div class="date">{{parseDate(recent.date)}}</div>
+          <div class="activeLevel" v-bind:class="recent.activeLevel">{{parseShortActiveLevel(recent.activeLevel)}}</div>
+          <div class="treatments">
+            <ul>
+              <li v-for="treatment in recent.treatment">{{treatment}}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -35,6 +41,19 @@ export default {
     var currDate = d.getDate()
     var currMonth = d.toLocaleString('en-us', { month: "long" });
     return ( weekDay + ', ' + currMonth + ' ' + currDate)
+    },
+    parseShortActiveLevel (activeLevel) {
+      switch (activeLevel) {
+        case activeLevel: 'Full'
+          return 'Active'
+          break;
+        case activeLevel: 'Half'
+          return 'Slower'
+          break;
+        case activeLevel: 'None'
+          return 'Missed'
+          break;
+      }
     }
   }
 }
@@ -71,6 +90,49 @@ export default {
       display: inline-block;
       width: 80%;
       padding-left: 0.5rem;
+      padding-right: 0.5rem;
+
+      .date{
+        font-weight: 300;
+      }
+
+      .activeLevel{
+        text-align: center;
+        border-radius: 6px;
+        padding: 0.4rem;
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        &.Full{
+          background: $blue;
+        }
+        &.Half{
+          background: $yellow;
+        }
+        &.None{
+          background: $orange;
+        }
+      }
+
+      .treatments{
+        ul{
+          padding: 0;
+          list-style: none;
+          margin: 0;
+
+          li{
+            display: inline-block;
+            margin-right: 0.3rem;
+            padding: 0.6rem;
+            background: $select;
+            margin-top: 0.4rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            font-weight: 500;
+          }
+        }
+      }
     }
   }
 </style>
