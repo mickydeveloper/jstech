@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <nav>
+      <router-link to="/">
+        Recent
+      </router-link>
+      <router-link to="/settings">
+        <i class="fa fa-cog" aria-hidden="true"></i>Settings
+      </router-link>
+      </nav>
     <router-view/>
   </div>
 </template>
@@ -20,13 +27,36 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+nav{
+  display: flex;
+  a{
+    padding: 1rem;
+    text-align: center;
+    display: inline-block;
+    width: 50%;
+    text-decoration: none;
+    color: $primary;
+    font-weight: 400;
+    font-size: 1rem;
+    font-size: 1.1rem;
+    opacity: 0.7;
+
+    &.router-link-exact-active {
+      opacity: 1;
+      border-bottom: 2px solid $primary;
+      font-weight: 500;
+    }
+
+    i{
+      margin-right: 0.5rem;
+    }
+  }
 }
+
+</style>
+
+<style lang="scss">
+@import 'style.scss';
+
 </style>

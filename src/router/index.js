@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Recent from '@/components/Recent'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
@@ -8,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      name: 'recent',
+      component: Recent
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
+    },
   ]
 })
