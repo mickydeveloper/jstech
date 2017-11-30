@@ -62,7 +62,7 @@ export default {
     li{
       display: flex;
       align-items: center;
-      padding: 0.5rem;
+      padding: 0.7rem;
       border-bottom: 1px solid rgb(108, 112, 125);
 
       &:last-of-type{

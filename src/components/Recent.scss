@@ -22,214 +22,80 @@
     display: flex;
   }
 
-  .no-data {
-    .edit {
-      width         : 100%;
-      flex-direction: column;
+  .edit {
+    width         : 100%;
+    flex-direction: column;
 
-      h3 {
-        text-align : center;
-        margin     : 0 0 0.5rem;
-        width      : 100%;
-        font-weight: 400;
-      }
+    h3 {
+      text-align : center;
+      margin     : 0 0 0.5rem;
+      width      : 100%;
+      font-weight: 400;
+    }
 
-      h4 {
-        margin-top : 2rem;
-        font-weight: 400;
-      }
+    h4 {
+      margin-top : 2rem;
+      font-weight: 400;
+    }
 
-      .selects-icons {
-        div {
-          display   : inline-block;
-          width     : 33%;
-          text-align: center;
-
-          i {
-            display        : block;
-            display        : flex;
-            justify-content: center;
-            font-size      : 3.5rem;
-            line-height    : 3.1rem;
-            @include respond-to(small-up) {
-              font-size: 5.5rem;
-            }
-
-            & + span {
-              display   : block;
-              margin-top: 0.3rem;
-            }
-          }
-        }
-
-        &.faces {
-          i {
-            color: transparent;
-
-            &:before {
-              background   : $smile-bg;
-              border-radius: 50%;
-            }
-
-            &.active:before {
-              background: transparent;
-            }
-          }
-        }
-
-        &.batteries {
-          i {
-            font-size  : 3rem;
-            line-height: 2.8rem;
-            color      : $smile-bg;
-          }
-        }
-      }
-
-      .treatments {
-        h4 {
-          margin-bottom: 0.4rem;
-        }
-
-        div {
-          text-align: center;
-          margin-top: 0.5rem;
-          color     : $blue;
-        }
-
-        ul {
-          padding   : 0;
-          list-style: none;
-          margin    : 0;
-
-          li {
-            display      : inline-block;
-            margin-right : 0.2rem;
-            padding      : 0.6rem;
-            margin-top   : 0.2rem;
-            font-size    : 0.9rem;
-            border-radius: 6px;
-            font-weight  : 500;
-            border       : 1px solid $primary;
-
-            &.active {
-              background: $select;
-              border    : 1px solid $select;
-            }
-          }
-        }
-      }
-
-      .notes {
-        margin        : 2rem 0;
-        display       : flex;
-        flex-direction: column;
-
-        label {
-          display: block;
-        }
-
-        input {
-          flex         : 1 1 auto;
-          padding      : 1rem;
-          border-radius: 5px;
-          border       : none;
-        }
-      }
-
-      button {
-        padding      : 0.8rem 1.2rem;
-        border       : none;
-        background   : #10bd77;
-        border-radius: 6px;
-        color        : $primary;
-        font-weight  : 500;
-        float        : right;
+    .selects-icons {
+      div {
+        display   : inline-block;
+        width     : 33%;
+        text-align: center;
 
         i {
-          color: $yellow;
+          display        : block;
+          display        : flex;
+          justify-content: center;
+          font-size      : 3.5rem;
+          line-height    : 3.1rem;
+          @include respond-to(small-up) {
+            font-size: 5.5rem;
+          }
+
+          & + span {
+            display   : block;
+            margin-top: 0.3rem;
+          }
         }
       }
-    }
-  }
 
-  .open-edit {
-    width  : 100%;
-    padding: 0.5rem 0;
-    display: flex;
-  }
+      &.faces {
+        i {
+          color: transparent;
 
-  .no-data .edit .batteries i.active,
-  .no-data .edit .faces i.active,
-  i {
-    &.fa-battery-full,
-    &.fa-battery-full + span,
-    &.fa-smile-o,
-    &.fa-smile-o + span {
-      color: $blue;
-    }
+          &:before {
+            background   : $smile-bg;
+            border-radius: 50%;
+          }
 
-    &.fa-battery-half,
-    &.fa-battery-half + span,
-    &.fa-meh-o,
-    &.fa-meh-o + span {
-      color: $yellow;
-    }
-
-    &.fa-battery-empty,
-    &.fa-battery-empty + span,
-    &.fa-frown-o,
-    &.fa-frown-o + span {
-      color: $orange;
-    }
-  }
-
-  .face {
-    display   : inline-block;
-    width     : 20%;
-    text-align: center;
-
-    i {
-      font-size: 3.5rem;
-      @include respond-to(small-up) {
-        font-size: 5.5rem;
-      }
-    }
-  }
-
-  .content {
-    display      : inline-block;
-    width        : 80%;
-    padding-left : 0.5rem;
-    padding-right: 0.5rem;
-
-    .date {
-      font-weight: 300;
-    }
-
-    .activeLevel {
-      text-align   : center;
-      border-radius: 6px;
-      padding      : 0.4rem;
-      margin-top   : 0.3rem;
-      margin-bottom: 0.2rem;
-      font-size    : 0.9rem;
-      font-weight  : 500;
-
-      &.Full {
-        background: $blue;
+          &.active:before {
+            background: transparent;
+          }
+        }
       }
 
-      &.Half {
-        background: $yellow;
-      }
-
-      &.None {
-        background: $orange;
+      &.batteries {
+        i {
+          font-size  : 3rem;
+          line-height: 2.8rem;
+          color      : $smile-bg;
+        }
       }
     }
 
     .treatments {
+      h4 {
+        margin-bottom: 0.4rem;
+      }
+
+      div {
+        text-align: center;
+        margin-top: 0.5rem;
+        color     : $blue;
+      }
+
       ul {
         padding   : 0;
         list-style: none;
@@ -239,12 +105,144 @@
           display      : inline-block;
           margin-right : 0.2rem;
           padding      : 0.6rem;
-          background   : $select;
           margin-top   : 0.2rem;
           font-size    : 0.9rem;
           border-radius: 6px;
           font-weight  : 500;
+          border       : 1px solid $primary;
+
+          &.active {
+            background: $select;
+            border    : 1px solid $select;
+          }
         }
+      }
+    }
+
+    .notes {
+      margin        : 2rem 0;
+      display       : flex;
+      flex-direction: column;
+
+      label {
+        display: block;
+      }
+
+      input {
+        flex         : 1 1 auto;
+        padding      : 1rem;
+        border-radius: 5px;
+        border       : none;
+      }
+    }
+
+    button {
+      padding      : 0.8rem 1.2rem;
+      border       : none;
+      background   : #10bd77;
+      border-radius: 6px;
+      color        : $primary;
+      font-weight  : 500;
+      float        : right;
+
+      i {
+        color: $yellow;
+      }
+    }
+  }
+}
+
+.open-edit {
+  width  : 100%;
+  padding: 0.5rem 0;
+  display: flex;
+}
+
+.edit .batteries i.active,
+.edit .faces i.active,
+i {
+  &.fa-battery-full,
+  &.fa-battery-full + span,
+  &.fa-smile-o,
+  &.fa-smile-o + span {
+    color: $blue;
+  }
+
+  &.fa-battery-half,
+  &.fa-battery-half + span,
+  &.fa-meh-o,
+  &.fa-meh-o + span {
+    color: $yellow;
+  }
+
+  &.fa-battery-empty,
+  &.fa-battery-empty + span,
+  &.fa-frown-o,
+  &.fa-frown-o + span {
+    color: $orange;
+  }
+}
+
+.face {
+  display   : inline-block;
+  width     : 20%;
+  text-align: center;
+
+  i {
+    font-size: 3.5rem;
+    @include respond-to(small-up) {
+      font-size: 5.5rem;
+    }
+  }
+}
+
+.content {
+  display      : inline-block;
+  width        : 80%;
+  padding-left : 0.5rem;
+  padding-right: 0.5rem;
+
+  .date {
+    font-weight: 300;
+  }
+
+  .activeLevel {
+    text-align   : center;
+    border-radius: 6px;
+    padding      : 0.4rem;
+    margin-top   : 0.3rem;
+    margin-bottom: 0.2rem;
+    font-size    : 0.9rem;
+    font-weight  : 500;
+
+    &.Full {
+      background: $blue;
+    }
+
+    &.Half {
+      background: $yellow;
+    }
+
+    &.None {
+      background: $orange;
+    }
+  }
+
+  .treatments {
+    ul {
+      padding   : 0;
+      list-style: none;
+      margin    : 0;
+
+      li {
+        display      : inline-block;
+        margin-right : 0.2rem;
+        padding      : 0.6rem;
+        background   : $select;
+        margin-top   : 0.2rem;
+        font-size    : 0.9rem;
+        border-radius: 6px;
+        font-weight  : 500;
       }
     }
   }
